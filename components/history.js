@@ -32,8 +32,6 @@ class History {
         if (this.words[guess] != undefined) return
         this.words[guess] = true
         this.rows.push({ guess, score })
-            // if (this.rows.length > 5) this.rows = this.rows.slice(1)
-            // this.total = this.rows.reduce((t, r) => r.score + t, 0)
         const scores = this.rows.map(v => v.score)
         scores.sort((a, b) => b - a)
         this.total = scores.slice(0, 3).reduce((t, v) => t + v, 0)

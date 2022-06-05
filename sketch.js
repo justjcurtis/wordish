@@ -69,14 +69,20 @@ function keyPressed() {
     handleKey(key)
 }
 
+let isBusy = false
+
 function mousePressed() {
+    if (isBusy) return
+    isBusy = true
     const char = letters.wasClicked(mouseX, mouseY)
     if (char != undefined) {
         handleKey(char)
+        setTimeout(() => { isBusy = false }, 200)
         return
     }
     if (mouseY < 350) {
         if (mouseX < 240) handleKey('Backspace')
         else handleKey('Enter')
     }
+    setTimeout(() => { isBusy = false }, 200)
 }

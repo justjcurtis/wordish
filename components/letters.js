@@ -13,7 +13,10 @@ class Letters {
         let x = this.x
         for (let i = 0; i < this.chars.length; i++) {
             let y = i < (this.chars.length / 2) ? this.y : this.y + this.letterSize + padding / 2
-            if ((I > x && I < x + this.letterSize) && (J > y && J < y + this.letterSize)) return i
+            if ((I > x && I < x + this.letterSize) && (J > y && J < y + this.letterSize)) {
+                if (this.tints.includes(i)) return undefined
+                return i
+            }
             x += this.letterSize + (padding)
             if (i == (this.chars.length / 2) - 1) x = padding
         }

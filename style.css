@@ -4,3 +4,43 @@ body {
     justify-content: center;
     background-color: #0D0D0D;
 }
+
+.container {
+    overflow: hidden;
+    background-color: #1A1A1A;
+    height: 100vh;
+}
+
+#historyBox {
+    background-color: #333333;
+    overflow: scroll;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20pt;
+    padding: 15px 50px 15px 50px;
+    height: 250px;
+}
+
+.historyRow {
+    margin: 0;
+    margin-bottom: 10px;
+    display: flex;
+}
+
+.rowItem {
+    margin: 0;
+    text-align: center;
+    flex: 1;
+}
+
+#total {
+    margin-top: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30pt;
+    color: white;
+}
+
+.totalContainer {
+    display: flex;
+    justify-content: center;
+}

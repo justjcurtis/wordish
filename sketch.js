@@ -1,17 +1,22 @@
 let w = 480
-let h = 720
 const wordEngine = new WordEngine()
-const history = new History()
+let history;
 let letters;
 let currentGuess = ''
 let availableLetters = []
+let historyBox;
+let totalText;
 
 function setup() {
-    createCanvas(w, windowHeight)
+    w = windowWidth > 480 ? 480 : windowWidth
+    createCanvas(w, 380)
     background('#1A1A1A')
     wordEngine.newWord()
     letters = new Letters(wordEngine.letters, w)
     availableLetters = letters.chars.slice(0)
+    historyBox = document.getElementById('historyBox')
+    totalText = document.getElementById('total')
+    history = new History(historyBox, totalText)
 }
 
 const renderGuess = guess => {
@@ -19,7 +24,7 @@ const renderGuess = guess => {
     noStroke()
     fill(255)
     textSize(40)
-    text(guess, ((w / 3) + (5 - guess.length) * 10) + 10, h / 2, w * (2 / 3), windowHeight / 2 + 50)
+    text(guess, ((w / 3) + (5 - guess.length) * 10) + 10, 550 / 2, w * (2 / 3), 550 / 2 + 50)
     pop()
 }
 
@@ -28,7 +33,7 @@ function draw() {
 
     letters.render()
     renderGuess(currentGuess)
-    history.render()
+        // history.render()
 }
 
 function keyPressed() {

@@ -14,7 +14,7 @@ function setup() {
     createCanvas(w, 380)
     background('#1A1A1A')
     wordEngine.newWord()
-    availableCount = wordEngine.allowed.length
+    availableCount = wordEngine.allowed.filter(w => w.length >= 3).length
     letters = new Letters(wordEngine.letters, w)
     availableLetters = letters.chars.slice(0)
     historyBox = document.getElementById('historyBox')

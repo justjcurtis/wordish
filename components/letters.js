@@ -8,6 +8,17 @@ class Letters {
         this.letterSize = undefined
     }
 
+    wasClicked(I, J) {
+        let x = this.x
+        for (let i = 0; i < this.chars.length; i++) {
+            let y = i < (this.chars.length / 2) ? this.y : this.y + this.letterSize + padding / 2
+            if ((I > x && I < x + this.letterSize) && (J > y && J < y + this.letterSize)) return this.chars[i]
+            x += this.letterSize + (padding)
+            if (i == (this.chars.length / 2) - 1) x = padding
+        }
+        return undefined
+    }
+
     init() {
         const fullLetter = (this.maxWidth - padding) / (this.chars.length / 2)
         const size = fullLetter - padding

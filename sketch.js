@@ -36,7 +36,7 @@ function draw() {
         // history.render()
 }
 
-function keyPressed() {
+const handleKey = key => {
     if (availableLetters.includes(key)) {
         currentGuess += key
         const i = availableLetters.indexOf(key)
@@ -62,5 +62,21 @@ function keyPressed() {
     }
     if (key == '§') {
         console.log(wordEngine.allowed)
+    }
+}
+
+function keyPressed() {
+    handleKey(key)
+}
+
+function mousePressed() {
+    const char = letters.wasClicked(mouseX, mouseY)
+    if (char != undefined) {
+        handleKey(char)
+        return
+    }
+    if (mouseY < 350) {
+        if (mouseX < 240) handleKey('Backspace')
+        else handleKey('Enter')
     }
 }

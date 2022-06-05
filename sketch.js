@@ -100,6 +100,17 @@ function mousePressed() {
         setTimeout(() => { isBusy = false }, 200)
         return
     }
+    if (mouseY < 40) {
+        letters.chars.sort((a, b) => Math.random() < 0.5 ? -1 : 1)
+        letters.chars.sort((a, b) => Math.random() < 0.5 ? -1 : 1)
+        letters.chars.sort((a, b) => Math.random() < 0.5 ? -1 : 1)
+        letters.tints = []
+        for (let i = 0; i < currentGuess.length; i++) {
+            letters.addTintToChar(currentGuess[i])
+        }
+        setTimeout(() => { isBusy = false }, 200)
+        return
+    }
     if (mouseY < 350) {
         if (mouseX < 240) handleKey('Backspace')
         else handleKey('Enter')

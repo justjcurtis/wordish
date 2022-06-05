@@ -6,12 +6,15 @@ let currentGuess = ''
 let availableLetters = []
 let historyBox;
 let totalText;
+let foundCount = 0
+let availableCount = 0
 
 function setup() {
     w = windowWidth > 480 ? 480 : windowWidth
     createCanvas(w, 380)
     background('#1A1A1A')
     wordEngine.newWord()
+    availableCount = wordEngine.allowed.length
     letters = new Letters(wordEngine.letters, w)
     availableLetters = letters.chars.slice(0)
     historyBox = document.getElementById('historyBox')
@@ -28,12 +31,21 @@ const renderGuess = guess => {
     pop()
 }
 
+const renderCounter = () => {
+    push()
+    textSize(15)
+    noStroke()
+    fill(255)
+    text(`${foundCount}/${availableCount}`, w - 50, 350, w - 30, 300)
+    pop()
+}
+
 function draw() {
     background('#1A1A1A')
 
     letters.render()
     renderGuess(currentGuess)
-        // history.render()
+    renderCounter()
 }
 
 const handleKey = key => {
@@ -50,9 +62,12 @@ const handleKey = key => {
     }
     if (key == 'Enter' && currentGuess.length >= 3) {
         const score = wordEngine.getWordScore(currentGuess)
-        if (score > 0) history.add(currentGuess, score)
-        availableLetters = letters.chars.slice(0)
-        currentGuess = ''
+        if (score > 0) {
+            history.add(currentGuess, score)
+            availableLetters = letters.chars.slice(0)
+            currentGuess = ''
+            foundCount++
+        }
     }
     if (key == 'Meta') {
         console.log(wordEngine.word)

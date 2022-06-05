@@ -48,15 +48,17 @@ function draw() {
     renderCounter()
 }
 
-const handleKey = key => {
+const handleKey = (key, skipTint = false) => {
     if (availableLetters.includes(key)) {
         currentGuess += key
         const i = availableLetters.indexOf(key)
+        if (!skipTint) letters.addTintToChar(key)
         availableLetters.splice(i, 1)
     }
     if (key == 'Backspace') {
         if (currentGuess.length < 1) return
         const char = currentGuess.slice(-1)
+        letters.removeTintFromChar(char)
         currentGuess = currentGuess.slice(0, -1)
         availableLetters.push(char)
     }
@@ -66,6 +68,7 @@ const handleKey = key => {
             history.add(currentGuess, score)
             availableLetters = letters.chars.slice(0)
             currentGuess = ''
+            letters.tints = []
             foundCount++
         }
     }
@@ -89,9 +92,11 @@ let isBusy = false
 function mousePressed() {
     if (isBusy) return
     isBusy = true
-    const char = letters.wasClicked(mouseX, mouseY)
+    const i = letters.wasClicked(mouseX, mouseY)
+    const char = letters.chars[i]
     if (char != undefined) {
-        handleKey(char)
+        letters.addTintToIndex(i)
+        handleKey(char, true)
         setTimeout(() => { isBusy = false }, 200)
         return
     }

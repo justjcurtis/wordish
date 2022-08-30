@@ -1,4 +1,7 @@
 const pad = 20
+const getLink = guess => {
+    return `https://www.google.com/search?q=define+${guess.split(' ').join('+')}`
+}
 class History {
     constructor(historyBox, totalText) {
         this.historyBox = historyBox
@@ -11,7 +14,7 @@ class History {
 
     getHistoryRowHTML(guess, score) {
         return `<div class="historyRow">
-            <p class="rowItem">${guess}</p>
+            <p class="rowItem">${guess}<a href="${getLink(guess)}" target="_blank"> 🔍</a></p>
             <p class="rowItem">+${score}</p>
         </div>`
     }
